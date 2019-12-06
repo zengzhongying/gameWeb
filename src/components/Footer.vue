@@ -18,21 +18,33 @@ export default {
   },
   methods: {
     goHome() {
+      if(this.index == 0) {
+        return;
+      }
       this.$router.push({
         name: "Home"
       });
     },
     goStrategy() {
+      if(this.index == 1) {
+        return;
+      }
       this.$router.push({
         name: "Strategy"
       });
     },
     goInformation() {
+      if(this.index ==2) {
+        return;
+      }
       this.$router.push({
         name: "Information"
       });
     },
     goAbout() {
+      if(this.index == 3) {
+        return;
+      }
       this.$router.push({
         name: "About"
       });
@@ -53,6 +65,8 @@ export default {
         case "About":
           return 3;
           break;
+        default:
+          -1;
       }
     }
   },

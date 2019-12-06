@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <a-carousel autoplay>
+    <!-- <a-carousel autoplay>
       <div>
         <img src="../assets/banner1.png" alt />
       </div>
@@ -10,14 +10,21 @@
       <div>
         <img src="../assets/banner3.jpg" alt />
       </div>
-    </a-carousel>
+    </a-carousel> -->
+    home
   </div>
 </template>
 
 <script>
+import Service from '../../api/user'
 export default {
   data() {
     return {};
+  },
+  mounted() {
+    Service.getUser().then(data => {
+      // console.log(data, 'data')
+    })
   }
 };
 </script>
