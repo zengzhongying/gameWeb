@@ -2,17 +2,19 @@ import axios from 'axios' //引用axios
 import router from '../src/router';
 
 axios.defaults.timeout = 3000;
-axios.defaults.baseURL = 'proxyApi'
-axios.defaults.headers.get['Content-Type'] = 'application/json;charse=UTF-8'
+axios.defaults.baseURL = '/proxyApi'
+// axios.defaults.headers.get['Content-Type'] = 'application/json;charse=UTF-8'
 axios.defaults.headers = {
     'Content-Type': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest'
+    'X-Requested-With': 'XMLHttpRequest',
+    'Pragma': 'no-cache',
+    'Cache-Control': 'no-store'
 }
 axios.interceptors.request.use(
     config => {
-        // if (config.method == 'get') {
-        //     config.data = { unused: 0 }
-        // }
+        if (config.method == 'get') {
+            config.data = true
+        }
         config.data = JSON.stringify(config.data);
         return config;
     },
@@ -23,7 +25,9 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
     response => {
-
+        // response.headers = {
+        //     'content-type': "application/json; charset=UTF-8"
+        // }
         if (response.status == 401) {
             router.push({
                 path: '/login'
@@ -45,7 +49,7 @@ export default {
                 method: 'get',
                 url: url,
                 param: param,
-                responseType: 'application/json'
+                responseType: 'json'
             }).then(res => {
                 resolve(res.data)
             }).catch(err => {

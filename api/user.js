@@ -4,6 +4,11 @@ const getUser = function () {
     return api.get('/getUserInfo')
 }
 
+const getUserName = function (obj) {
+    return api.post('/getUserName', obj)
+}
+
 export default {
-    getUser
+    getUser,
+    getUserName
 }
